@@ -9,6 +9,13 @@ export const getters = {
 export const mutations = {
   SET_SHTAT (state, shtat) {
     state.shtat = shtat
+  },
+
+  UPDATE_VOIN (state, voin) {
+    state.shtat = [
+      ...state.shtat.filter(el => el.num_shtat !== voin.num_shtat),
+      voin
+    ]
   }
 }
 
@@ -23,5 +30,10 @@ export const actions = {
       fr.onerror = reject;
       fr.readAsText(file);
     });
+  },
+
+  updateVoin ({ commit }, voin) {
+    console.log('updateVoin')
+    commit('UPDATE_VOIN', voin)
   }
 }
