@@ -2,10 +2,12 @@
   <v-row>
     <v-col>
       <v-expansion-panels>
-        <template v-for="(rota) in batalion">
-          <template v-for="vzvod in rota">
+        <template v-for="(rota, rotaKey) in batalion">
+          <template v-for="(vzvod, vzvodKey) in rota">
             <vzvod-panel
               :vzvod="vzvod"
+              :rota-key="rotaKey.toString()"
+              :vzvod-key="vzvodKey.toString()"
             />
           </template>
         </template>
@@ -22,11 +24,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'InspirePage',
   components: { VzvodPanel },
-  created() {
-    axios.get('/shtatka.json')
-      .then(({ data }) => this.fillBatalion(data))
-  },
-
   computed: {
     ...mapGetters({
       shtat: 'localStorage/shtat'
@@ -48,7 +45,24 @@ export default {
           batalion[voin.r][voin.vzv] = []
         }
 
+        if (!batalion[voin.r][voin.vzv]) {
+          batalion[voin.r][voin.vzv] = []
+        }
+
         batalion[voin.r][voin.vzv].push(voin)
+
+        if (voin.to_rota) {
+          console.log(voin)
+          if (!voin.to_rota && !batalion[voin.to_rota]) {
+            batalion[voin.to_rota] = []
+          }
+
+          if (!batalion[voin.to_rota][voin.to_vzvod]) {
+            batalion[voin.to_rota][voin.to_vzvod] = []
+          }
+
+          batalion[voin.to_rota][voin.to_vzvod].push(voin)
+        }
       })
 
       return batalion

@@ -38,7 +38,10 @@
                   <template
                     v-for="voin in addedFromBatalion"
                   >
-                    <voin-list-item :voin="voin" />
+                    <voin-list-item
+                      :voin="voin"
+                      :show-move-btn="false"
+                    />
                   </template>
                 </v-list-item-group>
               </v-list>
@@ -161,18 +164,23 @@ export default {
     vzvod: {
       type: Array,
       required: true
+    },
+    rotaKey: {
+      type: String,
+      required: true
+    },
+    vzvodKey: {
+      type: String,
+      required: true
     }
   },
-  data: () => ({
-    warriors: []
-  }),
   computed: {
     title() {
       return this.vzvod[0]['r'] + ' - ' + this.vzvod[0]['vzv']
     },
     inList () {
       return this.vzvod.filter(voin => {
-        return !!voin.assignment_r && !!voin.assignment_vzv
+        return voin.r.toString() === this.rotaKey.toString() && voin.vzv.toString() === this.vzvodKey.toString()
       })
     },
     inListTitle () {
@@ -188,8 +196,9 @@ export default {
     },
     addedFromBatalion () {
       return this.vzvod.filter(voin => {
-        return voin.assignment_r && voin.r !== voin.assignment_r &&
-          voin.assignment_vzv && voin.vzv !== voin.assignment_vzv
+        return voin.place === places.TAKEN_AWAY_IN_BATALION &&
+          (this.rotaKey.toString() !== voin.r.toString() ||
+          this.vzvodKey.toString() !== voin.vzv.toString())
       })
     },
     addedFromBatalionTitle () {
@@ -228,7 +237,11 @@ export default {
       return `В відрядженні ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
     },
     takenAwayInBatalion () {
-      return this.vzvod.filter(voin => voin.place === places.TAKEN_AWAY_IN_BATALION)
+      return this.vzvod.filter(voin => {
+        return voin.place === places.TAKEN_AWAY_IN_BATALION &&
+          this.rotaKey.toString() === voin.r.toString() &&
+          this.vzvodKey.toString() === voin.vzv.toString()
+      })
     },
     takenAwayInBatalionTitle () {
       const rankCount = rankString(this.takenAwayInBatalion)
