@@ -37,6 +37,7 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <export-to-file />
       <import-file />
     </v-app-bar>
     <v-main>
@@ -55,9 +56,10 @@
 
 <script>
 import ImportFile from "../components/ImportFile";
+import ExportToFile from "../components/ExportToFile";
 export default {
   name: 'DefaultLayout',
-  components: {ImportFile},
+  components: {ExportToFile, ImportFile},
   data () {
     return {
       clipped: false,
