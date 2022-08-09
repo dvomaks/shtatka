@@ -8,6 +8,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 const exportToFile = function (content, fileName, contentType) {
   const a = document.createElement("a");
@@ -26,7 +27,8 @@ export default {
   },
   methods: {
     exportToFile() {
-      exportToFile(JSON.stringify(this.shtat), 'json.json', 'text/plain')
+      const dateTime = moment().format('YYYY-MM-DD hh_mm_ss')
+      exportToFile(JSON.stringify(this.shtat), `${dateTime} shtatka.json`, 'text/plain')
     }
   }
 }
