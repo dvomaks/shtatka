@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="subheading font-weight-bold">
-      1 рота
+      Рота {{ rota }}
     </v-card-title>
 
     <v-divider></v-divider>
@@ -13,13 +13,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          1
+          {{ inList.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          4
+          {{ inList.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          24
+          {{ inList.soldiers }}
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -28,13 +28,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          2
+          {{ inStock.officers + addedFromBatalion.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          5
+          {{ inStock.sergeants + addedFromBatalion.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          20
+          {{ inStock.soldiers + addedFromBatalion.soldiers }}
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -43,13 +43,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          0
+          {{ inHospital.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          0
+          {{ inHospital.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          1
+          {{ inHospital.soldiers }}
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -58,13 +58,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          0
+          {{ takenAway.officers + takenInBatalion.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          0
+          {{ takenAway.sergeants + takenInBatalion.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          1
+          {{ takenAway.soldiers + takenInBatalion.soldiers }}
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -73,13 +73,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          0
+          {{ inVacation.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          0
+          {{ inVacation.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          1
+          {{ inVacation.soldiers }}
         </v-list-item-content>
       </v-list-item>
       <v-list-item>
@@ -88,13 +88,13 @@
         </v-list-item-content>
         <v-spacer />
         <v-list-item-content class="align-end">
-          0
+          {{ addedFromBatalion.officers }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          0
+          {{ addedFromBatalion.sergeants }}
         </v-list-item-content>
         <v-list-item-content class="align-end">
-          1
+          {{ addedFromBatalion.soldiers }}
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -102,8 +102,44 @@
 </template>
 
 <script>
+import * as utils from '~/utils'
+
 export default {
-  name: 'RotaCard'
+  name: 'RotaCard',
+  props: {
+    list: {
+      type: Array,
+      required: true
+    },
+    rota: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    inList () {
+      return utils.inList(this.list, this.rota)
+    },
+    inStock () {
+      return utils.inStock(this.list, this.rota)
+    },
+    inHospital () {
+      return utils.inHospital(this.list)
+    },
+    takenAway () {
+      return utils.takenAway(this.list)
+    },
+    takenInBatalion () {
+      return utils.takenInBatalion(this.list, this.rota)
+    },
+    addedFromBatalion () {
+      return utils.addedFromBatalion(this.list, this.rota)
+    },
+    inVacation () {
+      return utils.inVacation(this.list)
+    },
+
+  }
 }
 </script>
 

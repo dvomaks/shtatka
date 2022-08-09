@@ -146,16 +146,8 @@
 
 <script>
 import VoinListItem from "~/components/VoinListItem";
+import { rankCount, inList } from '~/utils'
 import * as places from '~/consts/places'
-import * as dataSet from '~/consts/data'
-
-const rankString = function (list) {
-  const officers = list.filter(el => el[dataSet.O_SKLAD_KEY] === dataSet.SKLAD_OFFICERS_VALUE).length
-  const sergeants = list.filter(el => el[dataSet.O_SKLAD_KEY] === dataSet.SKLAD_SERGEANTS_VALUE).length
-  const soldiers = list.filter(el => el[dataSet.O_SKLAD_KEY] === dataSet.SKLAD_SOLDIERS_VALUE).length
-
-  return { officers, sergeants, soldiers }
-}
 
 export default {
   name: 'VzvodPanel',
@@ -178,21 +170,16 @@ export default {
     title() {
       return this.vzvod[0]['r'] + ' - ' + this.vzvod[0]['vzv']
     },
-    inList () {
-      return this.vzvod.filter(voin => {
-        return voin.r.toString() === this.rotaKey.toString() && voin.vzv.toString() === this.vzvodKey.toString()
-      })
-    },
     inListTitle () {
-      const rankCount = rankString(this.inList)
-      return `За списком ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = inList(this.vzvod, this.rotaKey.toString(), this.rotaKey.toString())
+      return `За списком ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     inStock () {
       return this.vzvod.filter(voin => !voin.place)
     },
     inStockTitle () {
-      const rankCount = rankString(this.inStock)
-      return `${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.inStock)
+      return `${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     addedFromBatalion () {
       return this.vzvod.filter(voin => {
@@ -202,16 +189,16 @@ export default {
       })
     },
     addedFromBatalionTitle () {
-      const rankCount = rankString(this.addedFromBatalion)
-      return `${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.addedFromBatalion)
+      return `${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     inTotalStockTitle () {
-      const rankCount = rankString(this.inStock)
-      const rankCountAdded = rankString(this.addedFromBatalion)
+      const rc = rankCount(this.inStock)
+      const rankCountAdded = rankCount(this.addedFromBatalion)
 
-      const o = rankCount.officers + rankCountAdded.officers
-      const s = rankCount.sergeants + rankCountAdded.sergeants
-      const sl = rankCount.soldiers + rankCountAdded.soldiers
+      const o = rc.officers + rankCountAdded.officers
+      const s = rc.sergeants + rankCountAdded.sergeants
+      const sl = rc.soldiers + rankCountAdded.soldiers
 
       return `В наявності ${o}-${s}-${sl}`
     },
@@ -219,22 +206,22 @@ export default {
       return this.vzvod.filter(voin => voin.place === places.HOSPITAL)
     },
     inHospitalTitle () {
-      const rankCount = rankString(this.inHospital)
-      return `В лікарні ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.inHospital)
+      return `В лікарні ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     inVacation () {
       return this.vzvod.filter(voin => voin.place === places.VACATION)
     },
     inVacationTitle () {
-      const rankCount = rankString(this.inVacation)
-      return `В відпустці ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.inVacation)
+      return `В відпустці ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     takenAway () {
       return this.vzvod.filter(voin => voin.place === places.TAKEN_AWAY)
     },
     takenAwayTitle () {
-      const rankCount = rankString(this.takenAway)
-      return `В відрядженні ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.takenAway)
+      return `В відрядженні ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     takenAwayInBatalion () {
       return this.vzvod.filter(voin => {
@@ -244,8 +231,8 @@ export default {
       })
     },
     takenAwayInBatalionTitle () {
-      const rankCount = rankString(this.takenAwayInBatalion)
-      return `В відряджені в інший взвод ${rankCount.officers}-${rankCount.sergeants}-${rankCount.soldiers}`
+      const rc = rankCount(this.takenAwayInBatalion)
+      return `В відряджені в інший взвод ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     }
   }
 }

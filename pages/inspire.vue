@@ -51,7 +51,6 @@ export default {
         batalion[voin.r][voin.vzv].push(voin)
 
         if (voin.to_rota) {
-          console.log(voin)
           if (!voin.to_rota && !batalion[voin.to_rota]) {
             batalion[voin.to_rota] = []
           }
