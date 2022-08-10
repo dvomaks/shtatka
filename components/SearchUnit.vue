@@ -16,6 +16,11 @@
           :unit="unit"
           class="mt-n3"
         />
+        <unit-info
+          v-if="unit"
+          :unit="unit"
+          class="mt-n3"
+        />
       </template>
     </v-autocomplete>
 </template>
@@ -23,10 +28,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import MoveUnitDialog from '~/components/MoveUnitDialog';
+import UnitInfo from "./UnitInfo";
 
 export default {
   name: 'SearchUnit',
-  components: { MoveUnitDialog },
+  components: {UnitInfo, MoveUnitDialog },
   data() {
     return {
       unit: null,
@@ -38,6 +44,9 @@ export default {
     ...mapGetters({
       shtat: 'localStorage/shtat'
     })
+  },
+  created() {
+    this.units = this.shtat
   },
   watch: {
     search (val) {
