@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     exportToFile() {
-      const dateTime = moment().format('YYYY-MM-DD hh_mm_ss')
+      const dateTime = moment().format('YYYY-MM-DD HH_mm_ss')
       exportToFile(JSON.stringify(this.shtat), `${dateTime} shtatka.json`, 'text/plain')
     }
   }
