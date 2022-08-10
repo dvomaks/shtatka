@@ -177,7 +177,7 @@ export default {
       return this.vzvod[0]['r'] + ' - ' + this.vzvod[0]['vzv']
     },
     inListTitle () {
-      const rc = inList(this.vzvod, this.rotaKey.toString(), this.rotaKey.toString())
+      const rc = inList(this.vzvod, this.rotaKey.toString(), this.vzvodKey.toString())
       return `За списком ${rc.officers}-${rc.sergeants}-${rc.soldiers}`
     },
     inStock () {
