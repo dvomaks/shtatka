@@ -5,7 +5,10 @@
     </v-expansion-panel-header>
     <v-expansion-panel-content>
       <v-row>
-        <v-col cols="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-card
               class="mx-auto"
               max-width="500"
@@ -47,7 +50,10 @@
               </v-list>
             </v-card>
         </v-col>
-        <v-col cols="6">
+        <v-col
+          cols="12"
+          md="6"
+        >
           <v-row>
             <v-col cols="12">
               <v-card

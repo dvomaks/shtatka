@@ -28,7 +28,10 @@
                 ></v-select>
               </v-col>
               <template v-if="isTakenAwayMove">
-                <v-col cols="6">
+                <v-col
+                  cols="12"
+                  md="6"
+                >
                   <v-select
                     v-model="selectRota"
                     :items="selectRotaOptions"
@@ -38,7 +41,10 @@
                 </v-col>
               </template>
               <template v-if="selectRota">
-                <v-col cols="6">
+                <v-col
+                  cols="12"
+                  md="6"
+                >
                   <v-select
                     v-model="selectVzvod"
                     :items="selectVzvodOptions"
