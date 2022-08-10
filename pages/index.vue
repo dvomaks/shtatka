@@ -1,5 +1,70 @@
 <template>
-  <div>IN PROGRESS</div>
+  <v-simple-table>
+    <template v-slot:default>
+      <thead>
+      <tr>
+        <th class="text-left"/>
+        <th class="text-left">
+          Офіцери
+        </th>
+        <th class="text-left">
+          Сержанти
+        </th>
+        <th class="text-left">
+          Солдати
+        </th>
+        <th>
+          Разом
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>За списком</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>В лікарні</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>В госпіталі</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>В відряджені</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>В відпустці</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>В наявності</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+
+      </tbody>
+    </template>
+  </v-simple-table>
 </template>
 
 <script>
