@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="subheading font-weight-bold">
-      Рота {{ rota }}
+      {{ cardTitle }}
     </v-card-title>
 
     <v-divider></v-divider>
@@ -114,9 +114,16 @@ export default {
     rota: {
       type: String,
       required: true
+    },
+    title: {
+      type: String,
+      default: null
     }
   },
   computed: {
+    cardTitle () {
+      return this.title ? this.title : `Рота ${this.rota}`
+    },
     inList () {
       return utils.inList(this.list, this.rota)
     },

@@ -67,13 +67,18 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Батальйон',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-apps',
+          title: 'Роти',
+          to: '/rotes'
+        },
+        {
+          icon: 'mdi-apps',
+          title: 'Взводи',
+          to: '/vzvods'
         }
       ],
       title: 'Vuetify.js'

@@ -1,5 +1,18 @@
 <template>
-  <div>IN PROGRESS</div>
+  <v-row>
+    <v-col
+      v-for="(rota, key) in rotes"
+      :key="key"
+      cols="12"
+      md="6"
+    >
+      <rota-card
+        :title="rota"
+        :rota="key"
+        :list="rotaFilter(key)"
+      />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
