@@ -32,8 +32,7 @@ export const actions = {
     });
   },
 
-  updateVoin ({ commit }, voin) {
-    console.log('updateVoin')
+  updateUnit ({ commit }, voin) {
     commit('UPDATE_VOIN', voin)
   }
 }

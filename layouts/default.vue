@@ -37,6 +37,8 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <search-unit class="mt-6"/>
+      <v-spacer />
       <export-to-file />
       <import-file />
     </v-app-bar>
@@ -57,9 +59,10 @@
 <script>
 import ImportFile from "../components/ImportFile";
 import ExportToFile from "../components/ExportToFile";
+import SearchUnit from "../components/SearchUnit";
 export default {
   name: 'DefaultLayout',
-  components: {ExportToFile, ImportFile},
+  components: {SearchUnit, ExportToFile, ImportFile},
   data () {
     return {
       clipped: false,
