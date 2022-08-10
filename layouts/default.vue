@@ -35,9 +35,17 @@
       >
         <v-icon>mdi-theme-light-dark</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
       <v-spacer />
-      <search-unit class="mt-6"/>
+      <search-unit
+        v-if="!$vuetify.breakpoint.smAndDown"
+        class="mt-6"
+      />
+      <template
+        v-if="$vuetify.breakpoint.smAndDown"
+        v-slot:extension
+      >
+        <search-unit class="mt-6" />
+      </template>
       <v-spacer />
       <export-to-file />
       <import-file />
@@ -60,6 +68,7 @@
 import ImportFile from "../components/ImportFile";
 import ExportToFile from "../components/ExportToFile";
 import SearchUnit from "../components/SearchUnit";
+
 export default {
   name: 'DefaultLayout',
   components: {SearchUnit, ExportToFile, ImportFile},
