@@ -3,7 +3,8 @@ export const state = () => ({
 })
 
 export const getters = {
-  shtat: state => state.shtat.filter(el => el.pib !== '#N/A')
+  shtat: state => state.shtat.filter(el => el.pib !== '#N/A'),
+  staff: state => state.shtat.filter(el => el.pib !== '#N/A'),
 }
 
 export const mutations = {

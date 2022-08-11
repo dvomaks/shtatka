@@ -1,26 +1,26 @@
 <template>
   <v-list-item>
     <v-list-item-content>
-      <v-list-item-title v-text="voin.pib"></v-list-item-title>
+      <v-list-item-title v-text="unit.pib"></v-list-item-title>
     </v-list-item-content>
     <v-list-item-action v-if="showMoveBtn">
-      <move-unit-dialog :unit="voin" />
+      <move-unit-dialog :unit="unit" />
     </v-list-item-action>
     <v-list-item-action>
-      <unit-info :unit="voin" />
+      <unit-info :unit="unit" />
     </v-list-item-action>
   </v-list-item>
 </template>
 
 <script>
-import MoveUnitDialog from "~/components/MoveUnitDialog";
-import UnitInfo from "./UnitInfo";
+import MoveUnitDialog from '~/components/MoveUnitDialog';
+import UnitInfo from '~/components/UnitInfo';
 
 export default {
-  name: 'VoinListItem',
+  name: 'UnitListItem',
   components: { UnitInfo, MoveUnitDialog },
   props: {
-    voin: {
+    unit: {
       type: Object,
       required: true
     },

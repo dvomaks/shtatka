@@ -22,7 +22,8 @@ export const rankCount = function (list, place) {
 // За списком
 export const inList = function (list, rota, vzvod) {
   return rankCount(list.filter(voin => {
-    return voin.r.toString() === rota.toString() && (!vzvod || voin.vzv.toString() === vzvod.toString())
+    return (!rota || voin.r.toString() === rota.toString()) &&
+      (!vzvod || voin.vzv.toString() === vzvod.toString())
   }))
 }
 
@@ -31,9 +32,14 @@ export const inStock = function (list) {
   return rankCount(list.filter(voin => !voin.place))
 }
 
-// В лікарні
+// В госпіталі
 export const inHospital = function (list) {
   return rankCount(list, places.HOSPITAL)
+}
+
+// В лікарні
+export const inClinic = function (list) {
+  return rankCount(list, places.CLINIC)
 }
 
 // В відряджені
@@ -49,7 +55,7 @@ export const inVacation = function (list) {
 // В відряджені в інші підрозділи
 export const takenInBatalion = function (list, rota, vzvod) {
   return rankCount(list.filter(voin => {
-    const checkRota = rota.toString() === voin.r.toString()
+    const checkRota = rota ? rota.toString() === voin.r.toString() : true
     const checkVzvod = vzvod ? vzvod.toString() === voin.vzv.toString() : true
     const check = vzvod ? checkRota && checkVzvod : checkRota
 
@@ -60,7 +66,7 @@ export const takenInBatalion = function (list, rota, vzvod) {
 // Приряджені
 export const addedFromBatalion = function (list, rota, vzvod) {
   return rankCount(list.filter(voin => {
-    const checkRota = rota.toString() === voin.r.toString()
+    const checkRota = rota ? rota.toString() === voin.r.toString() : true
     const checkVzvod = vzvod ? vzvod.toString() === voin.vzv.toString() : true
     const check = vzvod ? checkRota && checkVzvod : checkRota
 

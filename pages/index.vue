@@ -1,97 +1,23 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-      <tr>
-        <th class="text-left"/>
-        <th class="text-left">
-          Офіцери
-        </th>
-        <th class="text-left">
-          Сержанти
-        </th>
-        <th class="text-left">
-          Солдати
-        </th>
-        <th>
-          Разом
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>За списком</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>В лікарні</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>В госпіталі</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>В відряджені</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>В відпустці</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>В наявності</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-      </tr>
-
-      </tbody>
-    </template>
-  </v-simple-table>
+  <div>
+    <h3>Батальйон</h3>
+    <staff-table
+      :staff="staff"
+    />
+  </div>
 </template>
 
 <script>
-import RotaCard from '~/components/RotaCard';
 import { mapGetters } from 'vuex'
-import { UNIT_LABEL } from '~/consts/data';
+import StaffTable from "../components/staff-table/StaffTable";
 
 export default {
   name: 'IndexPage',
-  components: { RotaCard },
-  data() {
-    return {
-      rotes: UNIT_LABEL
-    }
-  },
+  components: { StaffTable },
   computed: {
     ...mapGetters({
-      shtat: 'localStorage/shtat'
+      staff: 'localStorage/shtat'
     })
-  },
-  methods: {
-    rotaFilter (rota) {
-      return this.shtat.filter(el => {
-        return (el.r.toString() === rota) ||
-          (!!el.to_rota && el.to_rota.toString() === rota)
-      })
-    }
   }
 }
 </script>
